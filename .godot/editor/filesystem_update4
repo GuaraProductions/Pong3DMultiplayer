@@ -1,0 +1,14 @@
+res://Main/jogo.tscn
+res://Main/FonteTela.tres
+res://Main/Player/player.tscn
+res://Main/Player/Bola.tscn
+res://Main/Poderes/AreaSpawnPoderes.tscn
+res://Main/Poderes/Lentidao.tscn
+res://Main/Poderes/Acelerar.tscn
+res://Main/Telas.gd
+res://Main/Poderes/AreaSpawnPoderes.gd
+res://Main/Player/Bola.gd
+res://Main/Login.gd
+res://Main/Player/player.gd
+res://Main/jogo.gd
+res://Main/TelaDoJogo.gd

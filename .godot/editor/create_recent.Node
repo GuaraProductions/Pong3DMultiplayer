@@ -1,0 +1,14 @@
+MultiplayerSynchronizer
+HBoxContainer
+TextEdit
+Label
+Button
+VBoxContainer
+MarginContainer
+Control
+MeshInstance3D
+CollisionShape3D
+Area3D
+Timer
+Marker3D
+Node3D

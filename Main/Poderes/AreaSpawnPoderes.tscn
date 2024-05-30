@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://xhxmyfvoon4g"]
+
+[ext_resource type="Script" path="res://Main/Poderes/AreaSpawnPoderes.gd" id="1_f7ss7"]
+[ext_resource type="PackedScene" uid="uid://1gwg6owdihi8" path="res://Main/Poderes/Lentidao.tscn" id="2_ekgw2"]
+[ext_resource type="PackedScene" uid="uid://jl7ckajkhcy0" path="res://Main/Poderes/Acelerar.tscn" id="3_vmb22"]
+
+[node name="AreaSpawnPoderes" type="Node3D" node_paths=PackedStringArray("timer", "limite_superior", "limite_inferior")]
+script = ExtResource("1_f7ss7")
+timer = NodePath("Timer")
+limite_superior = NodePath("LimiteSuperior")
+limite_inferior = NodePath("LimiteInferior")
+poderes = Array[PackedScene]([ExtResource("2_ekgw2"), ExtResource("3_vmb22")])
+numero_poderes_maximo = 5.0
+
+[node name="LimiteSuperior" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9756, 0.569587, -7.87739)
+
+[node name="LimiteInferior" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1066, 0.805201, 9.92846)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

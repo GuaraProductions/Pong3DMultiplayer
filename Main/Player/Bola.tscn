@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkls4hu3uydv"]
+
+[ext_resource type="Script" path="res://Main/Player/Bola.gd" id="1_nnytf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_fnv2s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gore"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lp53q"]
+radius = 0.554504
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_27lpq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Bola" type="CharacterBody3D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_nnytf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_fnv2s")
+surface_material_override/0 = SubResource("StandardMaterial3D_8gore")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_lp53q")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_27lpq")
