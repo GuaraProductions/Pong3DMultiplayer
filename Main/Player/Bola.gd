@@ -2,8 +2,9 @@ extends CharacterBody3D
 class_name Bola
 
 @export var initial_speed : float = 12.0
-@export var fator_de_aumento_da_velocidade : float = 0.15
-@export var fator_de_diminuir_a_velocidade : float = 0.35
+@export var fator_de_aumento_da_velocidade : float = 0.25
+@export var fator_de_diminuir_a_velocidade : float = 0.20
+@export var sfx_player : SFXPlayer
 
 var direction : Vector3 = Vector3(1,0,1)
 
@@ -20,7 +21,7 @@ func _physics_process(delta):
 	var collision = move_and_collide(movement)
 	
 	if collision != null:
-		
+		sfx_player.hit_sfx(speed)
 		aumentar_velocidade()
 		
 		if collision.get_normal().z != 0:
@@ -35,16 +36,20 @@ func resetar(position: Vector3, para_a_direita: bool) -> void:
 	self.global_position = position
 	speed = initial_speed
 	direction = gerar_angulo_aleatorio(para_a_direita)
+	
+func parar(position: Vector3) -> void:
+	self.global_position = position
+	set_physics_process(false)
 
 func gerar_angulo_aleatorio(para_a_direita: bool) -> Vector3:
 	var angle : float
 	
 	if para_a_direita:
-		angle = randf_range(deg_to_rad(15), deg_to_rad(75))
+		angle = randf_range(deg_to_rad(35), deg_to_rad(75))
 		if randi() % 2 == 0:
 			angle = deg_to_rad(360) - angle
 	else:
-		angle = randf_range(deg_to_rad(105), deg_to_rad(165))
+		angle = randf_range(deg_to_rad(105), deg_to_rad(145))
 		if randi() % 2 == 0:
 			angle = deg_to_rad(360) - angle
 			

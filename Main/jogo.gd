@@ -11,6 +11,24 @@ extends Node3D
 
 @export var spawner_de_poder : Node3D
 
+var player1_spawn : Vector3
+var player2_spawn : Vector3
+
+func _ready():
+	player1_spawn = player1.global_position
+	player2_spawn = player2.global_position
+	
+func reset():
+	player1.global_position = player1_spawn
+	player2.global_position = player2_spawn
+	bola.visible = false
+	parar_bola()
+	resetar_bola(true)
+	spawner_de_poder.ativado = false
+	spawner_de_poder.remover_todos_poderes()
+	gol_player1.set_deferred("monitoring", true)
+	gol_player2.set_deferred("monitoring", true)
+
 func preparar_jogo_para_multiplayer(lado_esquerdo: bool = true) -> void:
 
 	if lado_esquerdo:
@@ -19,8 +37,8 @@ func preparar_jogo_para_multiplayer(lado_esquerdo: bool = true) -> void:
 	else:
 		player2.configurar_prioridade()
 		player2.configurar_controles(1)
-		gol_player1.queue_free()
-		gol_player2.queue_free()
+		gol_player1.set_deferred("monitoring", false)
+		gol_player2.set_deferred("monitoring", false)
 		começar_jogo.rpc(true)
 
 @rpc("any_peer","reliable","call_local")
@@ -43,6 +61,9 @@ func começar_jogo(eh_multiplayer: bool = false):
 
 func resetar_bola(para_a_direita: bool) -> void:
 	bola.resetar(marcador.global_position, para_a_direita)
+
+func parar_bola() -> void:
+	bola.parar(marcador.global_position)
 
 func _on_gol_player_1_body_entered(body):
 	resetar_bola(true)

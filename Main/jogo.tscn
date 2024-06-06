@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dfgj0lwfe2elm"]
+[gd_scene load_steps=35 format=3 uid="uid://dfgj0lwfe2elm"]
 
 [ext_resource type="Script" path="res://Main/jogo.gd" id="1_pukle"]
 [ext_resource type="PackedScene" uid="uid://ckxjoth8tom2t" path="res://Main/Player/player.tscn" id="1_wq4xo"]
@@ -8,6 +8,17 @@
 [ext_resource type="Script" path="res://Main/Telas.gd" id="6_4wghm"]
 [ext_resource type="PackedScene" uid="uid://xhxmyfvoon4g" path="res://Main/Poderes/AreaSpawnPoderes.tscn" id="7_u86i4"]
 [ext_resource type="Script" path="res://Main/Login.gd" id="9_f5b6f"]
+[ext_resource type="Script" path="res://Main/GameMusic.gd" id="9_g5x34"]
+[ext_resource type="Script" path="res://Main/TelaDeSom.gd" id="9_w7r42"]
+[ext_resource type="AudioStream" uid="uid://bn8spi8ri1jde" path="res://resources/music/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="10_6ah3i"]
+[ext_resource type="AudioStream" uid="uid://tgncc3nsayge" path="res://resources/music/Juhani Junkala [Retro Game Music Pack] Level 2.wav" id="11_7383g"]
+[ext_resource type="AudioStream" uid="uid://csu1jn5wccj3i" path="res://resources/music/Juhani Junkala [Retro Game Music Pack] Level 3.wav" id="12_gcm76"]
+[ext_resource type="Script" path="res://Main/SFXPlayer.gd" id="14_lkfnq"]
+[ext_resource type="AudioStream" uid="uid://cx4e86h3xbiia" path="res://resources/sfx/go_back.wav" id="15_th7x0"]
+[ext_resource type="AudioStream" uid="uid://x44wuuny1eqd" path="res://resources/sfx/hit.wav" id="16_ymudj"]
+[ext_resource type="AudioStream" uid="uid://hlb8u7f7vyi1" path="res://resources/sfx/point.wav" id="17_6bn72"]
+[ext_resource type="AudioStream" uid="uid://21i4lldajs1k" path="res://resources/sfx/press_button.wav" id="18_45ah5"]
+[ext_resource type="AudioStream" uid="uid://cc8jb8qk7o2gj" path="res://resources/sfx/winner.wav" id="19_nfqqw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtt2e"]
 albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
@@ -24,13 +35,19 @@ sky = SubResource("Sky_arn6k")
 ambient_light_source = 3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_byjv2"]
-size = Vector3(49.9646, 2.37488, 1)
+size = Vector3(50.3331, 2.37488, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m7kdu"]
-size = Vector3(49.965, 2.375, 1)
+size = Vector3(50.2613, 2.375, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ldk4a"]
 size = Vector3(2.65869, 3.21777, 25.9615)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bwn6"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_vp0a1"]
+font_size = 28
 
 [sub_resource type="LabelSettings" id="LabelSettings_nfxjm"]
 font_size = 102
@@ -85,18 +102,19 @@ directional_shadow_mode = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.705594, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeBaixo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012558, -0.410165, 13.0134)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.427559, -0.410165, 13.0134)
 shape = SubResource("BoxShape3D_byjv2")
 
 [node name="ParedeTopo" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512813, 0.705594, -26.0102)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeTopo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.684937, -0.410165, 13.0134)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.83309, -0.410165, 13.0134)
 shape = SubResource("BoxShape3D_m7kdu")
 
-[node name="Bola" parent="." instance=ExtResource("2_h4ylc")]
+[node name="Bola" parent="." node_paths=PackedStringArray("sfx_player") instance=ExtResource("2_h4ylc")]
 visible = false
+sfx_player = NodePath("../SFX")
 
 [node name="GolPlayer1" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.58, 0, 0)
@@ -118,18 +136,20 @@ shape = SubResource("BoxShape3D_ldk4a")
 
 [node name="PosicaoInicial" type="Marker3D" parent="."]
 
-[node name="AreaSpawnPoderes" parent="." node_paths=PackedStringArray("node_spawnar") instance=ExtResource("7_u86i4")]
+[node name="AreaSpawnPoderes" parent="." node_paths=PackedStringArray("node_spawnar", "sfx_player") instance=ExtResource("7_u86i4")]
 node_spawnar = NodePath("..")
+sfx_player = NodePath("../SFX")
 
-[node name="Telas" type="CanvasLayer" parent="." node_paths=PackedStringArray("placar", "tela_principal", "tela_login", "game")]
+[node name="Telas" type="CanvasLayer" parent="." node_paths=PackedStringArray("placar", "tela_principal", "tela_login", "game", "sfx_player")]
 process_mode = 3
 script = ExtResource("6_4wghm")
 placar = NodePath("Placar")
 tela_principal = NodePath("Principal")
 tela_login = NodePath("Login")
 game = NodePath("..")
+sfx_player = NodePath("../SFX")
 
-[node name="Placar" type="MarginContainer" parent="Telas" node_paths=PackedStringArray("placar_player_1", "placar_player_2", "texto_vencedor")]
+[node name="Placar" type="MarginContainer" parent="Telas" node_paths=PackedStringArray("placar_player_1", "placar_player_2", "player1_nome", "player2_nome", "texto_vencedor", "pos_partida", "sfx_player")]
 process_mode = 1
 visible = false
 anchors_preset = 15
@@ -142,9 +162,29 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 55
 theme_override_constants/margin_bottom = 55
 script = ExtResource("4_kxv83")
+placar_maximo = 1
 placar_player_1 = NodePath("Player1")
 placar_player_2 = NodePath("Player2")
-texto_vencedor = NodePath("Vencedor")
+player1_nome = NodePath("Jogadores/Jogador1")
+player2_nome = NodePath("Jogadores/Jogador2")
+texto_vencedor = NodePath("PosPartida/Vencedor")
+pos_partida = NodePath("PosPartida")
+sfx_player = NodePath("../../SFX")
+
+[node name="Jogadores" type="HBoxContainer" parent="Telas/Placar"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Jogador1" type="Label" parent="Telas/Placar/Jogadores"]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_1bwn6")
+
+[node name="Jogador2" type="Label" parent="Telas/Placar/Jogadores"]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_vp0a1")
+horizontal_alignment = 2
 
 [node name="Player1" type="Label" parent="Telas/Placar"]
 layout_mode = 2
@@ -160,12 +200,38 @@ size_flags_vertical = 0
 text = "0"
 label_settings = SubResource("LabelSettings_pxdr8")
 
-[node name="Vencedor" type="Label" parent="Telas/Placar"]
+[node name="PosPartida" type="VBoxContainer" parent="Telas/Placar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Vencedor" type="Label" parent="Telas/Placar/PosPartida"]
 layout_mode = 2
 size_flags_horizontal = 4
 label_settings = ExtResource("4_g3kj7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Telas/Placar/PosPartida"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Revanche" type="Button" parent="Telas/Placar/PosPartida/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Revanche"
+
+[node name="Sair" type="Button" parent="Telas/Placar/PosPartida/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Sair"
 
 [node name="Principal" type="MarginContainer" parent="Telas"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -207,10 +273,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
 script = ExtResource("9_f5b6f")
 ip = NodePath("VBoxContainer/ServerInfoField/Ip")
 port = NodePath("VBoxContainer/ServerInfoField/Port")
 nickname = NodePath("VBoxContainer/NicknameField/Nickname")
+
+[node name="Back" type="Button" parent="Telas/Login"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Voltar"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Telas/Login"]
 layout_mode = 2
@@ -289,13 +364,96 @@ theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_eotil")
 text = "Logar"
 
+[node name="Som" type="MarginContainer" parent="Telas" node_paths=PackedStringArray("tela_som")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -265.0
+offset_bottom = 165.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+script = ExtResource("9_w7r42")
+tela_som = NodePath("ColorRect")
+
+[node name="AbrirSom" type="Button" parent="Telas/Som"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Som"
+
+[node name="ColorRect" type="ColorRect" parent="Telas/Som"]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+color = Color(0.290196, 0.305882, 0.8, 0.521569)
+
+[node name="MarginContainer" type="MarginContainer" parent="Telas/Som/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Telas/Som/ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="SairBotao" type="Button" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Fechar"
+
+[node name="MusicaLabel" type="Label" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Musica:"
+
+[node name="MusicaSlider" type="HSlider" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 8.0
+
+[node name="SFXLabel" type="Label" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Efeitos sonoros:"
+
+[node name="SFXSlider" type="HSlider" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 8.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+volume_db = -45.0
+bus = &"Music"
+script = ExtResource("9_g5x34")
+possible_musics = Array[AudioStream]([ExtResource("10_6ah3i"), ExtResource("11_7383g"), ExtResource("12_gcm76")])
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+pitch_scale = 0.01
+bus = &"SFX"
+script = ExtResource("14_lkfnq")
+sfxs = Array[AudioStream]([ExtResource("15_th7x0"), ExtResource("16_ymudj"), ExtResource("17_6bn72"), ExtResource("18_45ah5"), ExtResource("19_nfqqw")])
+
 [connection signal="body_entered" from="GolPlayer1" to="." method="_on_gol_player_1_body_entered"]
 [connection signal="body_entered" from="GolPlayer1" to="Telas/Placar" method="_on_gol_player_1_body_entered"]
 [connection signal="body_entered" from="GolPlayer2" to="." method="_on_gol_player_2_body_entered"]
 [connection signal="body_entered" from="GolPlayer2" to="Telas/Placar" method="_on_gol_player_2_body_entered"]
+[connection signal="pressed" from="Telas/Placar/PosPartida/HBoxContainer/Revanche" to="Telas" method="_on_revanche_pressed"]
+[connection signal="pressed" from="Telas/Placar/PosPartida/HBoxContainer/Sair" to="Telas" method="_on_sair_pressed"]
 [connection signal="pressed" from="Telas/Principal/VBoxContainer/Local" to="Telas" method="_on_local_pressed"]
 [connection signal="pressed" from="Telas/Principal/VBoxContainer/Multiplayer" to="Telas" method="_on_multiplayer_pressed"]
 [connection signal="criar_server" from="Telas/Login" to="Telas" method="_on_login_criar_server"]
 [connection signal="logar" from="Telas/Login" to="Telas" method="_on_login_logar"]
+[connection signal="pressed" from="Telas/Login/Back" to="Telas" method="_on_back_pressed"]
 [connection signal="pressed" from="Telas/Login/VBoxContainer/Buttons/CriarServer" to="Telas/Login" method="_on_criar_server_pressed"]
 [connection signal="pressed" from="Telas/Login/VBoxContainer/Buttons/Logar" to="Telas/Login" method="_on_logar_pressed"]
+[connection signal="pressed" from="Telas/Som/AbrirSom" to="Telas/Som" method="_on_abrir_som_pressed"]
+[connection signal="pressed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/SairBotao" to="Telas/Som" method="_on_sair_botao_pressed"]
+[connection signal="value_changed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/MusicaSlider" to="Telas/Som" method="_on_musica_slider_value_changed"]
+[connection signal="value_changed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/SFXSlider" to="Telas/Som" method="_on_sfx_slider_value_changed"]

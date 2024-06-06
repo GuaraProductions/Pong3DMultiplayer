@@ -10,7 +10,7 @@ timer = NodePath("Timer")
 limite_superior = NodePath("LimiteSuperior")
 limite_inferior = NodePath("LimiteInferior")
 poderes = Array[PackedScene]([ExtResource("2_ekgw2"), ExtResource("3_vmb22")])
-numero_poderes_maximo = 5.0
+numero_poderes_maximo = 3.0
 
 [node name="LimiteSuperior" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9756, 0.569587, -7.87739)
@@ -19,6 +19,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9756, 0.569587, -7.87739)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1066, 0.805201, 9.92846)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 15.0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
