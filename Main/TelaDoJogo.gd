@@ -49,6 +49,8 @@ func atualizar_placar_gol_player2():
 	if placar_inteiro == placar_maximo:
 		player2_ganhou.emit()
 		mostrar_vencendor(player_2_win_color, player2_nome.text)
+	else:
+		sfx_player.points_sfx()
 	
 	placar_player_2.text = str(placar_inteiro)
 

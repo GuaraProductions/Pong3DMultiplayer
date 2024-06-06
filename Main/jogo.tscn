@@ -162,7 +162,6 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 55
 theme_override_constants/margin_bottom = 55
 script = ExtResource("4_kxv83")
-placar_maximo = 1
 placar_player_1 = NodePath("Player1")
 placar_player_2 = NodePath("Player2")
 player1_nome = NodePath("Jogadores/Jogador1")
@@ -231,7 +230,6 @@ theme_override_font_sizes/font_size = 28
 text = "Sair"
 
 [node name="Principal" type="MarginContainer" parent="Telas"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -265,6 +263,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
 text = "Multiplayer"
+
+[node name="Quit" type="Button" parent="Telas/Principal/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "Sair"
 
 [node name="Login" type="MarginContainer" parent="Telas" node_paths=PackedStringArray("ip", "port", "nickname")]
 visible = false
@@ -428,12 +433,14 @@ layout_mode = 2
 max_value = 8.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 volume_db = -45.0
 bus = &"Music"
 script = ExtResource("9_g5x34")
 possible_musics = Array[AudioStream]([ExtResource("10_6ah3i"), ExtResource("11_7383g"), ExtResource("12_gcm76")])
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 volume_db = -20.0
 pitch_scale = 0.01
 bus = &"SFX"
@@ -448,6 +455,7 @@ sfxs = Array[AudioStream]([ExtResource("15_th7x0"), ExtResource("16_ymudj"), Ext
 [connection signal="pressed" from="Telas/Placar/PosPartida/HBoxContainer/Sair" to="Telas" method="_on_sair_pressed"]
 [connection signal="pressed" from="Telas/Principal/VBoxContainer/Local" to="Telas" method="_on_local_pressed"]
 [connection signal="pressed" from="Telas/Principal/VBoxContainer/Multiplayer" to="Telas" method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="Telas/Principal/VBoxContainer/Quit" to="Telas" method="_on_quit_pressed"]
 [connection signal="criar_server" from="Telas/Login" to="Telas" method="_on_login_criar_server"]
 [connection signal="logar" from="Telas/Login" to="Telas" method="_on_login_logar"]
 [connection signal="pressed" from="Telas/Login/Back" to="Telas" method="_on_back_pressed"]
@@ -457,3 +465,4 @@ sfxs = Array[AudioStream]([ExtResource("15_th7x0"), ExtResource("16_ymudj"), Ext
 [connection signal="pressed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/SairBotao" to="Telas/Som" method="_on_sair_botao_pressed"]
 [connection signal="value_changed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/MusicaSlider" to="Telas/Som" method="_on_musica_slider_value_changed"]
 [connection signal="value_changed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/SFXSlider" to="Telas/Som" method="_on_sfx_slider_value_changed"]
+[connection signal="finished" from="Music" to="Music" method="_on_finished"]

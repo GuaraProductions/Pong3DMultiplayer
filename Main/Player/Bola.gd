@@ -6,6 +6,8 @@ class_name Bola
 @export var fator_de_diminuir_a_velocidade : float = 0.20
 @export var sfx_player : SFXPlayer
 
+@export var velocidade_maxima = 35
+
 var direction : Vector3 = Vector3(1,0,1)
 
 var speed : float
@@ -26,11 +28,11 @@ func _physics_process(delta):
 		
 		if collision.get_normal().z != 0:
 			direction.z = -direction.z
-		elif collision.get_normal().x != 0:
+		if collision.get_normal().x != 0:
 			direction.x = -direction.x
-		else:
-			direction.x = -direction.x
-			direction.z = -direction.z
+			
+		movement = direction * speed * delta
+		move_and_collide(movement)
 	
 func resetar(position: Vector3, para_a_direita: bool) -> void:
 	self.global_position = position
@@ -61,4 +63,4 @@ func diminuir_velocidade() -> void:
 	speed = max(speed - speed * fator_de_diminuir_a_velocidade, 6)
 	
 func aumentar_velocidade() -> void:
-	speed += (speed * fator_de_aumento_da_velocidade)
+	speed += min((speed * fator_de_aumento_da_velocidade),velocidade_maxima)

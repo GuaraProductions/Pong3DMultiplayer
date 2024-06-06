@@ -30,7 +30,6 @@ func press_button_sfx():
 	play()
 	
 func winner_sfx():
-	print("pitch_scale: ", pitch_scale)
 	pitch_scale = 1
 	stream = sfxs[4]
 	play()

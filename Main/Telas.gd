@@ -144,3 +144,7 @@ func _on_back_pressed():
 	placar.visible = false
 	tela_principal.visible = true
 	tela_login.visible = false 
+
+
+func _on_quit_pressed():
+	get_tree().quit()
