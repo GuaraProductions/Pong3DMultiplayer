@@ -1,12 +1,12 @@
 extends CharacterBody3D
 class_name Bola
 
-@export var initial_speed : float = 12.0
+@export var initial_speed : float = 12
 @export var fator_de_aumento_da_velocidade : float = 0.25
 @export var fator_de_diminuir_a_velocidade : float = 0.20
 @export var sfx_player : SFXPlayer
 
-@export var velocidade_maxima = 35
+@export var velocidade_maxima = 65
 
 var direction : Vector3 = Vector3(1,0,1)
 
@@ -63,4 +63,4 @@ func diminuir_velocidade() -> void:
 	speed = max(speed - speed * fator_de_diminuir_a_velocidade, 6)
 	
 func aumentar_velocidade() -> void:
-	speed += min((speed * fator_de_aumento_da_velocidade),velocidade_maxima)
+	speed = min(speed + (speed * fator_de_aumento_da_velocidade),velocidade_maxima)

@@ -122,9 +122,10 @@ func preparar_revanche():
 
 func _on_sair_pressed():
 	sfx_player.press_button_sfx()
+	fechar_jogo()
+	
+func fechar_jogo():
 	multiplayer.multiplayer_peer.close()
-	game.reset()
-	placar.reset()
 	voltar_tela_principal()
 	multiplayer_ligado = false
 	
@@ -136,6 +137,7 @@ func player_desconectou(id: int):
 func voltar_tela_principal():
 	get_tree().paused = true
 	game.reset()
+	placar.reset()
 	placar.visible = false
 	tela_principal.visible = true
 
@@ -145,6 +147,13 @@ func _on_back_pressed():
 	tela_principal.visible = true
 	tela_login.visible = false 
 
+func _input(event):
+	
+	if Input.is_action_pressed("quit_game") and game.jogo_iniciado:
+		fechar_jogo()
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+func _on_criador_botao_pressed():
+	OS.shell_open("https://www.youtube.com/channel/UCLKDlJYYqKRg_CEokPUceEQ")

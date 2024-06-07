@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Main/TelaDoJogo.gd" id="4_kxv83"]
 [ext_resource type="Script" path="res://Main/Telas.gd" id="6_4wghm"]
 [ext_resource type="PackedScene" uid="uid://xhxmyfvoon4g" path="res://Main/Poderes/AreaSpawnPoderes.tscn" id="7_u86i4"]
+[ext_resource type="Texture2D" uid="uid://cuspn4llfkeah" path="res://resources/images/guara.png" id="8_yt2iy"]
 [ext_resource type="Script" path="res://Main/Login.gd" id="9_f5b6f"]
 [ext_resource type="Script" path="res://Main/GameMusic.gd" id="9_g5x34"]
 [ext_resource type="Script" path="res://Main/TelaDeSom.gd" id="9_w7r42"]
@@ -34,14 +35,7 @@ background_mode = 2
 sky = SubResource("Sky_arn6k")
 ambient_light_source = 3
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_byjv2"]
-size = Vector3(50.3331, 2.37488, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_m7kdu"]
-size = Vector3(50.2613, 2.375, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ldk4a"]
-size = Vector3(2.65869, 3.21777, 25.9615)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_y3225"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1bwn6"]
 font_size = 28
@@ -56,7 +50,7 @@ font_size = 102
 font_size = 102
 
 [sub_resource type="LabelSettings" id="LabelSettings_d2w5k"]
-font_size = 128
+font_size = 110
 
 [sub_resource type="LabelSettings" id="LabelSettings_ohm7h"]
 font_size = 36
@@ -66,6 +60,9 @@ bg_color = Color(0.296546, 0.651029, 0.775134, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eotil"]
 bg_color = Color(0.658824, 0.694118, 0.87451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6y4p"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Jogo" type="Node3D" node_paths=PackedStringArray("bola", "marcador", "player1", "player2", "gol_player1", "gol_player2", "spawner_de_poder")]
 script = ExtResource("1_pukle")
@@ -98,19 +95,19 @@ transform = Transform3D(1, 0, 0, 0, 0.0181853, 0.999835, 0, -0.999835, 0.0181853
 shadow_enabled = true
 directional_shadow_mode = 0
 
-[node name="ParedeBaixo" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.705594, 0)
+[node name="Parede4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.797131, 15.8926, 12.8603)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeBaixo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.427559, -0.410165, 13.0134)
-shape = SubResource("BoxShape3D_byjv2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parede4"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.28082, -0.0485124, -12.3428)
+shape = SubResource("WorldBoundaryShape3D_y3225")
 
-[node name="ParedeTopo" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512813, 0.705594, -26.0102)
+[node name="Parede2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.39201, -13.1055)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeTopo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.83309, -0.410165, 13.0134)
-shape = SubResource("BoxShape3D_m7kdu")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parede2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_y3225")
 
 [node name="Bola" parent="." node_paths=PackedStringArray("sfx_player") instance=ExtResource("2_h4ylc")]
 visible = false
@@ -122,17 +119,17 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GolPlayer1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.829346, 0.512472, -0.0332813)
-shape = SubResource("BoxShape3D_ldk4a")
+transform = Transform3D(-8.74228e-08, 2, -8.74228e-08, 0, -8.74228e-08, -2, -2, -8.74228e-08, 3.82137e-15, 2.6838, 3.40379, 3.49672)
+shape = SubResource("WorldBoundaryShape3D_y3225")
 
 [node name="GolPlayer2" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2462, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9466, 0, 0)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GolPlayer2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.829346, 0.512472, -0.0332813)
-shape = SubResource("BoxShape3D_ldk4a")
+transform = Transform3D(-8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0, 2, 2.1873, 3.46911, 0)
+shape = SubResource("WorldBoundaryShape3D_y3225")
 
 [node name="PosicaoInicial" type="Marker3D" parent="."]
 
@@ -271,6 +268,30 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
 text = "Sair"
 
+[node name="Criador" type="VBoxContainer" parent="Telas/Principal"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="CriadorBotao" type="Button" parent="Telas/Principal/Criador"]
+layout_mode = 2
+text = "Criado por
+@guaraprogramador"
+flat = true
+alignment = 0
+
+[node name="TextureRect" type="TextureRect" parent="Telas/Principal/Criador"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("8_yt2iy")
+
+[node name="Label" type="Label" parent="Telas/Principal"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "V1.1"
+
 [node name="Login" type="MarginContainer" parent="Telas" node_paths=PackedStringArray("ip", "port", "nickname")]
 visible = false
 anchors_preset = 15
@@ -387,9 +408,12 @@ tela_som = NodePath("ColorRect")
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_s6y4p")
 text = "Som"
 
 [node name="ColorRect" type="ColorRect" parent="Telas/Som"]
+visible = false
 custom_minimum_size = Vector2(250, 150)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -456,6 +480,7 @@ sfxs = Array[AudioStream]([ExtResource("15_th7x0"), ExtResource("16_ymudj"), Ext
 [connection signal="pressed" from="Telas/Principal/VBoxContainer/Local" to="Telas" method="_on_local_pressed"]
 [connection signal="pressed" from="Telas/Principal/VBoxContainer/Multiplayer" to="Telas" method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="Telas/Principal/VBoxContainer/Quit" to="Telas" method="_on_quit_pressed"]
+[connection signal="pressed" from="Telas/Principal/Criador/CriadorBotao" to="Telas" method="_on_criador_botao_pressed"]
 [connection signal="criar_server" from="Telas/Login" to="Telas" method="_on_login_criar_server"]
 [connection signal="logar" from="Telas/Login" to="Telas" method="_on_login_logar"]
 [connection signal="pressed" from="Telas/Login/Back" to="Telas" method="_on_back_pressed"]

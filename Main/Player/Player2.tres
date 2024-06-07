@@ -6,3 +6,4 @@
 script = ExtResource("1_oq7hh")
 up = "player2_up"
 down = "player2_down"
+sprint = "player2_sprint"

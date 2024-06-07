@@ -14,6 +14,8 @@ extends Node3D
 var player1_spawn : Vector3
 var player2_spawn : Vector3
 
+var jogo_iniciado : bool = false
+
 func _ready():
 	player1_spawn = player1.global_position
 	player2_spawn = player2.global_position
@@ -28,6 +30,7 @@ func reset():
 	spawner_de_poder.remover_todos_poderes()
 	gol_player1.set_deferred("monitoring", true)
 	gol_player2.set_deferred("monitoring", true)
+	jogo_iniciado = false
 
 func preparar_jogo_para_multiplayer(lado_esquerdo: bool = true) -> void:
 
@@ -55,6 +58,7 @@ func começar_jogo(eh_multiplayer: bool = false):
 		player2.configurar_controles(2)
 		spawner_de_poder.ativado = true
 		
+	jogo_iniciado = true
 	bola.visible = true
 	bola.resetar(marcador.global_position, randi() % 2)
 	bola.set_physics_process(true)

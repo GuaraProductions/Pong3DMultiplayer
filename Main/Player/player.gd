@@ -25,6 +25,11 @@ func _physics_process(delta):
 	if controls == null:
 		set_physics_process(false)
 		return
+	
+	if Input.is_action_pressed(controls.sprint):
+		speed = 25
+	else:
+		speed = 15
 
 	var input_vector := Vector3.ZERO
 	

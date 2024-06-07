@@ -33,6 +33,7 @@ func reset(resetar_nomes: bool = true):
 	placar_player_2.text = "0"
 	pos_partida.visible = false
 	texto_vencedor.text = ""
+	texto_vencedor.visible = false
 	jogo_acabou = false
 
 func _on_gol_player_1_body_entered(body):
@@ -42,7 +43,7 @@ func _on_gol_player_1_body_entered(body):
 	
 	atualizar_placar_gol_player2.rpc()
 
-@rpc("any_peer","call_local")
+@rpc("authority","call_local")
 func atualizar_placar_gol_player2():
 	var placar_inteiro := int(placar_player_2.text) + 1
 	
@@ -61,7 +62,7 @@ func _on_gol_player_2_body_entered(body):
 		
 	atualizar_placar_gol_player1.rpc()
 	
-@rpc("any_peer","call_local")
+@rpc("authority","call_local")
 func atualizar_placar_gol_player1():
 	var placar_inteiro := int(placar_player_1.text) + 1
 	
