@@ -13,6 +13,7 @@ var direction : Vector3 = Vector3(1,0,1)
 var speed : float
 
 func _ready():
+	set_multiplayer_authority(1)
 	set_physics_process(false)
 	speed = initial_speed
 	

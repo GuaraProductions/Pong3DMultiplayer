@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://xhxmyfvoon4g"]
 
-[ext_resource type="Script" path="res://Main/Poderes/AreaSpawnPoderes.gd" id="1_f7ss7"]
+[ext_resource type="Script" uid="uid://ckrw6xdpf054c" path="res://Main/Poderes/AreaSpawnPoderes.gd" id="1_f7ss7"]
 [ext_resource type="PackedScene" uid="uid://1gwg6owdihi8" path="res://Main/Poderes/Lentidao.tscn" id="2_ekgw2"]
 [ext_resource type="PackedScene" uid="uid://jl7ckajkhcy0" path="res://Main/Poderes/Acelerar.tscn" id="3_vmb22"]
 

@@ -1,26 +1,26 @@
-[gd_scene load_steps=38 format=3 uid="uid://dfgj0lwfe2elm"]
+[gd_scene load_steps=37 format=3 uid="uid://dfgj0lwfe2elm"]
 
-[ext_resource type="Script" uid="uid://cjk678ialsi3u" path="res://Main/jogo.gd" id="1_pukle"]
+[ext_resource type="Script" path="res://Main/jogo.gd" id="1_pukle"]
 [ext_resource type="PackedScene" uid="uid://ckxjoth8tom2t" path="res://Main/Player/player.tscn" id="1_wq4xo"]
 [ext_resource type="PackedScene" uid="uid://bkls4hu3uydv" path="res://Main/Player/Bola.tscn" id="2_h4ylc"]
 [ext_resource type="LabelSettings" uid="uid://bf2y2qmvfkjj3" path="res://Main/FonteTela.tres" id="4_g3kj7"]
-[ext_resource type="Script" uid="uid://cicnh1vufhhwc" path="res://Main/TelaDoJogo.gd" id="4_kxv83"]
-[ext_resource type="Script" uid="uid://bhux87js37v4m" path="res://Main/Telas.gd" id="6_4wghm"]
+[ext_resource type="Script" path="res://Main/TelaDoJogo.gd" id="4_kxv83"]
+[ext_resource type="Script" path="res://Main/Telas.gd" id="6_4wghm"]
 [ext_resource type="PackedScene" uid="uid://xhxmyfvoon4g" path="res://Main/Poderes/AreaSpawnPoderes.tscn" id="7_u86i4"]
 [ext_resource type="Texture2D" uid="uid://cuspn4llfkeah" path="res://resources/images/guara.png" id="8_yt2iy"]
-[ext_resource type="Script" uid="uid://bul0pkkqqghlk" path="res://Main/Login.gd" id="9_f5b6f"]
-[ext_resource type="Script" uid="uid://bk152acg05a60" path="res://Main/GameMusic.gd" id="9_g5x34"]
-[ext_resource type="Script" uid="uid://bu21wfs2dpipv" path="res://Main/TelaDeSom.gd" id="9_w7r42"]
+[ext_resource type="Script" path="res://Main/Login.gd" id="9_f5b6f"]
+[ext_resource type="Script" path="res://Main/GameMusic.gd" id="9_g5x34"]
+[ext_resource type="Script" path="res://Main/TelaDeSom.gd" id="9_w7r42"]
 [ext_resource type="AudioStream" uid="uid://bn8spi8ri1jde" path="res://resources/music/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="10_6ah3i"]
 [ext_resource type="AudioStream" uid="uid://tgncc3nsayge" path="res://resources/music/Juhani Junkala [Retro Game Music Pack] Level 2.wav" id="11_7383g"]
 [ext_resource type="AudioStream" uid="uid://csu1jn5wccj3i" path="res://resources/music/Juhani Junkala [Retro Game Music Pack] Level 3.wav" id="12_gcm76"]
-[ext_resource type="Script" uid="uid://buytlrq5gw16d" path="res://Main/SFXPlayer.gd" id="14_lkfnq"]
+[ext_resource type="Script" path="res://Main/SFXPlayer.gd" id="14_lkfnq"]
 [ext_resource type="AudioStream" uid="uid://cx4e86h3xbiia" path="res://resources/sfx/go_back.wav" id="15_th7x0"]
 [ext_resource type="AudioStream" uid="uid://x44wuuny1eqd" path="res://resources/sfx/hit.wav" id="16_ymudj"]
 [ext_resource type="AudioStream" uid="uid://hlb8u7f7vyi1" path="res://resources/sfx/point.wav" id="17_6bn72"]
 [ext_resource type="AudioStream" uid="uid://21i4lldajs1k" path="res://resources/sfx/press_button.wav" id="18_45ah5"]
 [ext_resource type="AudioStream" uid="uid://cc8jb8qk7o2gj" path="res://resources/sfx/winner.wav" id="19_nfqqw"]
-[ext_resource type="Script" uid="uid://jc8nlppbdsok" path="res://Main/microphone.gd" id="21_xuija"]
+[ext_resource type="Script" path="res://Main/microphone.gd" id="21_xuija"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtt2e"]
 albedo_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
@@ -65,20 +65,8 @@ bg_color = Color(0.658824, 0.694118, 0.87451, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6y4p"]
 bg_color = Color(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3f0pa"]
-bg_color = Color(0.85098, 0.478431, 0.796078, 0.435294)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-expand_margin_left = 15.0
-expand_margin_top = 15.0
-expand_margin_right = 15.0
-expand_margin_bottom = 15.0
-
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_wfxi0"]
 mix_rate = 48000.0
-buffer_length = 2.5
 
 [node name="Jogo" type="Node3D" node_paths=PackedStringArray("bola", "marcador", "player1", "player2", "gol_player1", "gol_player2", "spawner_de_poder")]
 script = ExtResource("1_pukle")
@@ -127,7 +115,7 @@ shape = SubResource("WorldBoundaryShape3D_y3225")
 
 [node name="Bola" parent="." node_paths=PackedStringArray("sfx_player") instance=ExtResource("2_h4ylc")]
 visible = false
-sfx_player = NodePath("../AudioNodes/SFX")
+sfx_player = NodePath("../SFX")
 
 [node name="GolPlayer1" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.58, 0, 0)
@@ -151,7 +139,7 @@ shape = SubResource("WorldBoundaryShape3D_y3225")
 
 [node name="AreaSpawnPoderes" parent="." node_paths=PackedStringArray("node_spawnar", "sfx_player") instance=ExtResource("7_u86i4")]
 node_spawnar = NodePath("..")
-sfx_player = NodePath("../AudioNodes/SFX")
+sfx_player = NodePath("../SFX")
 
 [node name="Telas" type="CanvasLayer" parent="." node_paths=PackedStringArray("placar", "tela_principal", "tela_login", "game", "sfx_player", "microfone")]
 process_mode = 3
@@ -160,8 +148,8 @@ placar = NodePath("Placar")
 tela_principal = NodePath("Principal")
 tela_login = NodePath("Login")
 game = NodePath("..")
-sfx_player = NodePath("../AudioNodes/SFX")
-microfone = NodePath("../AudioNodes/Microphone")
+sfx_player = NodePath("../SFX")
+microfone = NodePath("../Microphone")
 
 [node name="Placar" type="MarginContainer" parent="Telas" node_paths=PackedStringArray("placar_player_1", "placar_player_2", "player1_nome", "player2_nome", "texto_vencedor", "pos_partida", "sfx_player")]
 process_mode = 1
@@ -182,7 +170,7 @@ player1_nome = NodePath("Jogadores/Jogador1")
 player2_nome = NodePath("Jogadores/Jogador2")
 texto_vencedor = NodePath("PosPartida/Vencedor")
 pos_partida = NodePath("PosPartida")
-sfx_player = NodePath("../../AudioNodes/SFX")
+sfx_player = NodePath("../../SFX")
 
 [node name="Jogadores" type="HBoxContainer" parent="Telas/Placar"]
 layout_mode = 2
@@ -244,7 +232,6 @@ theme_override_font_sizes/font_size = 28
 text = "Sair"
 
 [node name="Principal" type="MarginContainer" parent="Telas"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -311,6 +298,7 @@ size_flags_vertical = 8
 text = "V1.1"
 
 [node name="Login" type="MarginContainer" parent="Telas" node_paths=PackedStringArray("ip", "port", "nickname")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -419,7 +407,7 @@ size_flags_vertical = 3
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 script = ExtResource("9_w7r42")
-tela_som = NodePath("MarginContainer")
+tela_som = NodePath("ColorRect")
 
 [node name="AbrirSom" type="Button" parent="Telas/Som"]
 layout_mode = 2
@@ -429,73 +417,77 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_s6y4p")
 text = "Som"
 
-[node name="MarginContainer" type="PanelContainer" parent="Telas/Som"]
+[node name="ColorRect" type="ColorRect" parent="Telas/Som"]
 visible = false
+custom_minimum_size = Vector2(250, 150)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3f0pa")
+size_flags_horizontal = 8
+size_flags_vertical = 0
+color = Color(0.290196, 0.305882, 0.8, 0.521569)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Telas/Som/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Telas/Som/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Telas/Som/ColorRect/MarginContainer"]
 layout_mode = 2
 
-[node name="SairBotao" type="Button" parent="Telas/Som/MarginContainer/VBoxContainer"]
+[node name="SairBotao" type="Button" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Fechar"
 
-[node name="MusicaLabel" type="Label" parent="Telas/Som/MarginContainer/VBoxContainer"]
+[node name="MusicaLabel" type="Label" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Musica:"
 
-[node name="MusicaSlider" type="HSlider" parent="Telas/Som/MarginContainer/VBoxContainer"]
+[node name="MusicaSlider" type="HSlider" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 8.0
 
-[node name="SFXLabel" type="Label" parent="Telas/Som/MarginContainer/VBoxContainer"]
+[node name="SFXLabel" type="Label" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Efeitos sonoros:"
 
-[node name="SFXSlider" type="HSlider" parent="Telas/Som/MarginContainer/VBoxContainer"]
+[node name="SFXSlider" type="HSlider" parent="Telas/Som/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 8.0
 
-[node name="PlayerVoiceLabel" type="Label" parent="Telas/Som/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Chat de voz:"
-
-[node name="PlayerVoice" type="HSlider" parent="Telas/Som/MarginContainer/VBoxContainer"]
-layout_mode = 2
-max_value = 8.0
-
-[node name="AudioNodes" type="Node" parent="."]
-
-[node name="Music" type="AudioStreamPlayer" parent="AudioNodes"]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-volume_db = -80.0
+volume_db = -45.0
 bus = &"Music"
 script = ExtResource("9_g5x34")
 possible_musics = Array[AudioStream]([ExtResource("10_6ah3i"), ExtResource("11_7383g"), ExtResource("12_gcm76")])
 
-[node name="SFX" type="AudioStreamPlayer" parent="AudioNodes"]
+[node name="SFX" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-volume_db = -80.0
+volume_db = -20.0
 pitch_scale = 0.01
 bus = &"SFX"
 script = ExtResource("14_lkfnq")
 sfxs = Array[AudioStream]([ExtResource("15_th7x0"), ExtResource("16_ymudj"), ExtResource("17_6bn72"), ExtResource("18_45ah5"), ExtResource("19_nfqqw")])
 
-[node name="Microphone" type="AudioStreamPlayer" parent="AudioNodes" node_paths=PackedStringArray("other_player_audio")]
+[node name="Microphone" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("other_player_audio")]
 process_mode = 3
+volume_db = -0.25
 autoplay = true
 bus = &"Record"
-playback_type = 1
 script = ExtResource("21_xuija")
-other_player_audio = NodePath("../Enemy")
+other_player_audio = NodePath("../MicrophoneEnemy")
 
-[node name="Enemy" type="AudioStreamPlayer" parent="AudioNodes"]
+[node name="MicrophoneEnemy" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamGenerator_wfxi0")
-volume_db = 1.068
+volume_db = -0.937
 autoplay = true
-bus = &"VoiceChat"
 
 [connection signal="body_entered" from="GolPlayer1" to="." method="_on_gol_player_1_body_entered"]
 [connection signal="body_entered" from="GolPlayer1" to="Telas/Placar" method="_on_gol_player_1_body_entered"]
@@ -513,8 +505,7 @@ bus = &"VoiceChat"
 [connection signal="pressed" from="Telas/Login/VBoxContainer/Buttons/CriarServer" to="Telas/Login" method="_on_criar_server_pressed"]
 [connection signal="pressed" from="Telas/Login/VBoxContainer/Buttons/Logar" to="Telas/Login" method="_on_logar_pressed"]
 [connection signal="pressed" from="Telas/Som/AbrirSom" to="Telas/Som" method="_on_abrir_som_pressed"]
-[connection signal="pressed" from="Telas/Som/MarginContainer/VBoxContainer/SairBotao" to="Telas/Som" method="_on_sair_botao_pressed"]
-[connection signal="value_changed" from="Telas/Som/MarginContainer/VBoxContainer/MusicaSlider" to="Telas/Som" method="_on_musica_slider_value_changed"]
-[connection signal="value_changed" from="Telas/Som/MarginContainer/VBoxContainer/SFXSlider" to="Telas/Som" method="_on_sfx_slider_value_changed"]
-[connection signal="value_changed" from="Telas/Som/MarginContainer/VBoxContainer/PlayerVoice" to="Telas/Som" method="_on_player_voice_value_changed"]
-[connection signal="finished" from="AudioNodes/Music" to="AudioNodes/Music" method="_on_finished"]
+[connection signal="pressed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/SairBotao" to="Telas/Som" method="_on_sair_botao_pressed"]
+[connection signal="value_changed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/MusicaSlider" to="Telas/Som" method="_on_musica_slider_value_changed"]
+[connection signal="value_changed" from="Telas/Som/ColorRect/MarginContainer/VBoxContainer/SFXSlider" to="Telas/Som" method="_on_sfx_slider_value_changed"]
+[connection signal="finished" from="Music" to="Music" method="_on_finished"]

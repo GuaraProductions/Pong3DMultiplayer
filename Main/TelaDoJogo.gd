@@ -3,7 +3,7 @@ extends MarginContainer
 signal player1_ganhou()
 signal player2_ganhou()
 
-@export var placar_maximo : int = 5
+@export var placar_maximo : int = 1
 
 @export var player_1_win_color : Color = Color.ROYAL_BLUE
 @export var player_2_win_color : Color = Color.INDIAN_RED

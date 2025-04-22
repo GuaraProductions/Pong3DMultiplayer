@@ -7,6 +7,8 @@ extends CanvasLayer
 
 @export var sfx_player : SFXPlayer
 
+@export var microfone : Microfone
+
 var peers := {}
 
 var host_name : String = ""
@@ -38,6 +40,11 @@ func _on_multiplayer_pressed():
 	sfx_player.press_button_sfx()
 
 func _on_login_criar_server(ip, port_number, nickname):
+	
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
+	
 	sfx_player.press_button_sfx()
 	var local_peer = ENetMultiplayerPeer.new()
 	
@@ -46,6 +53,7 @@ func _on_login_criar_server(ip, port_number, nickname):
 		OS.alert("Deu ruim")
 		return
 		
+	microfone.configurar_audio(1)
 	multiplayer.peer_disconnected.connect(player_desconectou)
 	multiplayer.multiplayer_peer = local_peer
 	host_name = nickname
@@ -66,8 +74,13 @@ func _on_login_logar(ip, port_number, nickname):
 	
 	await multiplayer.connected_to_server
 	
+	await get_tree().create_timer(0.1).timeout
+	
 	multiplayer.server_disconnected.connect(voltar_tela_principal)
 	registrar_peer(nickname, multiplayer.get_unique_id())
+	
+	microfone.configurar_audio(multiplayer.get_unique_id())
+	
 	peer_conectado.rpc(nickname)
 	placar.atualizar_nome_convidado.rpc(nickname)
 	multiplayer_ligado = true
@@ -126,15 +139,21 @@ func _on_sair_pressed():
 	
 func fechar_jogo():
 	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = null
+	microfone.fechar()
+	
 	voltar_tela_principal()
 	multiplayer_ligado = false
+	microfone.finalizar_audio()
 	
 func player_desconectou(id: int):
+	microfone.fechar()
 	game.reset()
 	placar.reset()
 	multiplayer_ligado = false
 	
 func voltar_tela_principal():
+	microfone.fechar()
 	get_tree().paused = true
 	game.reset()
 	placar.reset()

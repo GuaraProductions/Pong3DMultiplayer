@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bkls4hu3uydv"]
 
-[ext_resource type="Script" path="res://Main/Player/Bola.gd" id="1_nnytf"]
+[ext_resource type="Script" uid="uid://dxlwa67ayibd2" path="res://Main/Player/Bola.gd" id="1_nnytf"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fnv2s"]
 
